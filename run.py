@@ -29,7 +29,7 @@ if __name__ == '__main__':
 	parser = ArgumentParser(description='Get image edge maps')
 	parser.add_argument('--data_dir', required=True, type=str, help='path to image data directory')
 	parser.add_argument('--save_dir', required=True, type=str, help='path to save resulting edge maps')
-	parser.add_argument('--saved_model_path', default='network-bsds500.pth', type=str, help='path of saved PyTorch model')
+	parser.add_argument('--saved_model_path', default='bsds500.pth', type=str, help='path of saved PyTorch model')
 	args = parser.parse_args()
 
 	if not os.path.exists(args.save_dir):

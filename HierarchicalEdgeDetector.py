@@ -6,7 +6,7 @@ from torch.nn import functional as F
 
 class HierarchicalEdgeDetector(nn.Module):
 
-    def __init__(self, saved_model_path='network-bsds500.pth'):
+    def __init__(self, saved_model_path='bsds500.pth'):
         super().__init__()
 
         self.netVggOne = nn.Sequential(
@@ -72,7 +72,7 @@ class HierarchicalEdgeDetector(nn.Module):
             self.load_state_dict({strKey.replace('module', 'net'): tenWeight for strKey, tenWeight in
                                   torch.load(saved_model_path, map_location=lambda storage, loc: storage).items()})
             self.eval()
-            if 'network-bsds500.pth' in saved_model_path:
+            if 'bsds500.pth' in saved_model_path:
                 self.dataset_mean = torch.FloatTensor([122.67891434, 116.66876762, 104.00698793]).view(1, 3, 1, 1)
                 self.dataset_scale = torch.FloatTensor([255, 255, 255]).view(1, 3, 1, 1)
                 self.model_size = (320, 480)
