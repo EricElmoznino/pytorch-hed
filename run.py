@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from tqdm import tqdm
 import torch
 import os
 from torch.utils.data import Dataset, DataLoader
@@ -38,7 +39,7 @@ if __name__ == '__main__':
 	model = HierarchicalEdgeDetector(args.saved_model_path)
 	dataloader = DataLoader(ImageDataset(args.data_dir), batch_size=64, num_workers=2)
 
-	for images, image_names in dataloader:
+	for images, image_names in tqdm(dataloader):
 		with torch.no_grad():
 			edges = model(images)
 		for edge, image_name in zip(edges, image_names):

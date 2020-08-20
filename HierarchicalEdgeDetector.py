@@ -133,6 +133,8 @@ class HierarchicalEdgeDetector(nn.Module):
     def crop_pad(self, image, pad):
         if all([p == 0 for p in pad]):
             return image
-        image = image[:, :, pad[2]:-pad[3], pad[0]:-pad[1]]
+        height_bounds = (pad[2], image.size(2) - pad[3])
+        width_bounds = (pad[0], image.size(3) - pad[1])
+        image = image[:, :, height_bounds[0]:height_bounds[1], width_bounds[0]:width_bounds[1]]
         return image
 
